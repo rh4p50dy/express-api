@@ -1,4 +1,4 @@
-# expressapi
+# Express-API
 
 To install dependencies:
 
