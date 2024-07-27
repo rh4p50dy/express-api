@@ -5,7 +5,7 @@ const cors = require('cors');
 
 
 // Types
-import type { Express, Request, Response } from 'express';
+import type { Express } from 'express';
 
 // Routers 
 import  { userRouter } from "./src/routes/user"
@@ -37,7 +37,7 @@ const server = app.listen(3000, ():void => {
 const gracefulShutdown = async () => {
     await prisma.$disconnect();
     server.close(() => {
-    console.log("Yaycha API closed.");
+    console.log("API is closed.");
     process.exit(0);
     });
 };
