@@ -37,8 +37,8 @@ const server = app.listen(3000, ():void => {
 const gracefulShutdown = async () => {
     await prisma.$disconnect();
     server.close(() => {
-    console.log("API is closed.");
-    process.exit(0);
+        console.log("API is closed.");
+        process.exit(0);
     });
 };
 

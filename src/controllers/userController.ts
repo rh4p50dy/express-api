@@ -1,5 +1,6 @@
 import { prisma } from "../../prismaClient";
 import type { Request, Response } from 'express';
+const bcrypt = require('bcrypt');
 
 
 // get all post
@@ -17,7 +18,7 @@ export const index = async (req: Request, res: Response): Promise<void> => {
         });
         res.json(data);
     }catch(err){
-        res.status(500).json({ error: err });
+        res.status(500).json({ msg: err });
     }
 }
 
@@ -36,6 +37,29 @@ export const getUserById = async ( req: Request, res : Response): Promise<void> 
         res.json(data);
     }
     catch(err){
-        res.status(500).json({ error: err });
+        res.status(500).json({ msg: err });
+    }
+}
+
+export const addUser = async (req: Request, res: Response): Promise<void> => {
+    try{
+        const { username, name, bio, password } = req.body;
+        if(!name || !username || !password){
+            res.status(400).json({ msg: "name, username and password are required" });
+            return;
+        }
+        const hash = await bcrypt.hash(password, 10);
+        const user = await prisma.user.create({
+            data: {
+                username,
+                name,
+                bio,
+                password: hash,
+            }
+        });
+        res.status(200).json(user);
+    }
+    catch(err){
+        res.status(500).json({ msg: err });
     }
 }
