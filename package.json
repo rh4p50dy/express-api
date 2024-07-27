@@ -1,6 +1,6 @@
 {
-  "name": "expressapi",
-  "module": "index.ts",
+  "name": "express-api",
+  "module": "app.ts",
   "type": "module",
   "devDependencies": {
     "@types/bun": "latest",
